@@ -6,7 +6,7 @@
 /*   By: hdescamp <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:32:31 by hdescamp          #+#    #+#             */
-/*   Updated: 2025/01/07 08:38:06 by hdescamp         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:57:29 by hdescamp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ char	*read_file(int fd, char *res)
 	char	*buffer;
 	int		byte_read;
 
-	if (!res)
-		res = ft_calloc(1, 1);
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	byte_read = 1;
 	while (byte_read > 0)
@@ -97,12 +95,17 @@ char	*get_next_line(int fd)
 	static char	*buffer[OPEN_MAX];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= OPEN_MAX)
 		return (NULL);
 	buffer[fd] = read_file(fd, buffer[fd]);
 	if (!buffer[fd])
 		return (NULL);
 	line = ft_line(buffer[fd]);
 	buffer[fd] = ft_next(buffer[fd]);
+	if (!ft_strlen(line))
+	{
+		free (line);
+		return (NULL);
+	}
 	return (line);
 }

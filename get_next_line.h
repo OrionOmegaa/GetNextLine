@@ -22,10 +22,10 @@
 # endif
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *string, int searchedChar );
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strchr(const char *string, int searched_char );
 void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t elementCount, size_t elementSize);
-size_t	ft_strlen(const char *theString);
+void	*ft_calloc(size_t element_count, size_t element_size);
+size_t	ft_strlen(const char *str);
 
 #endif
